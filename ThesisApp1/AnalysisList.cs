@@ -19,20 +19,20 @@ namespace ThesisApp1
         //implement the sorting yourself.
         //Sorting is necessary to avoid duplicate events in the data.
         //[XmlIgnore]
-        public SortedSet<AnalysisEvent> EventList { get; }
+        public List<AnalysisEvent> EventList { get; }
 
         //parameterless constructor
         public AnalysisList()
         {
             FileSavedIn = "";
-            EventList = new SortedSet<AnalysisEvent>(new EventComparison());
+            EventList = new List<AnalysisEvent>();
         }
 
         public AnalysisList(string topFolder)
         {
             FileSavedIn = "";
             TopDirectory = topFolder;
-            EventList = new SortedSet<AnalysisEvent>(new EventComparison());
+            EventList = new List<AnalysisEvent>();
         }
 
         //This method iterates through the given directory to find all files with the .xml extension.
@@ -138,9 +138,9 @@ namespace ThesisApp1
             }
         }
 
-        public bool AddEvent(AnalysisEvent newEvent)
+        public void AddEvent(AnalysisEvent newEvent)
         {
-            return EventList.Add(newEvent);
+            EventList.Add(newEvent);
         }
 
         public override string ToString()
