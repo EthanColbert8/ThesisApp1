@@ -44,8 +44,9 @@ namespace ThesisApp1
             this.runAnalysisButton = new System.Windows.Forms.Button();
             this.mainTabSpace = new System.Windows.Forms.TabControl();
             this.analysisTab = new System.Windows.Forms.TabPage();
-            this.outputLabel = new System.Windows.Forms.Label();
             this.execTimeLabel = new System.Windows.Forms.Label();
+            this.outputLabel = new System.Windows.Forms.Label();
+            this.mainDisplayPanel = new System.Windows.Forms.Panel();
             this.mainMenuStrip.SuspendLayout();
             this.toolsPanel.SuspendLayout();
             this.mainTabSpace.SuspendLayout();
@@ -183,6 +184,7 @@ namespace ThesisApp1
             // analysisTab
             // 
             this.analysisTab.AutoScroll = true;
+            this.analysisTab.Controls.Add(this.mainDisplayPanel);
             this.analysisTab.Controls.Add(this.execTimeLabel);
             this.analysisTab.Controls.Add(this.outputLabel);
             this.analysisTab.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -194,6 +196,16 @@ namespace ThesisApp1
             this.analysisTab.Text = "Current Analysis";
             this.analysisTab.UseVisualStyleBackColor = true;
             // 
+            // execTimeLabel
+            // 
+            this.execTimeLabel.AutoSize = true;
+            this.execTimeLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.execTimeLabel.Location = new System.Drawing.Point(6, 3);
+            this.execTimeLabel.Name = "execTimeLabel";
+            this.execTimeLabel.Size = new System.Drawing.Size(290, 21);
+            this.execTimeLabel.TabIndex = 1;
+            this.execTimeLabel.Text = "Analysis execution time will appear here.";
+            // 
             // outputLabel
             // 
             this.outputLabel.AutoSize = true;
@@ -204,15 +216,14 @@ namespace ThesisApp1
             this.outputLabel.TabIndex = 0;
             this.outputLabel.Text = "Results will appear here.";
             // 
-            // execTimeLabel
+            // mainDisplayPanel
             // 
-            this.execTimeLabel.AutoSize = true;
-            this.execTimeLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.execTimeLabel.Location = new System.Drawing.Point(6, 3);
-            this.execTimeLabel.Name = "execTimeLabel";
-            this.execTimeLabel.Size = new System.Drawing.Size(290, 21);
-            this.execTimeLabel.TabIndex = 1;
-            this.execTimeLabel.Text = "Analysis execution time will appear here.";
+            this.mainDisplayPanel.AutoScroll = true;
+            this.mainDisplayPanel.AutoSize = true;
+            this.mainDisplayPanel.Location = new System.Drawing.Point(6, 60);
+            this.mainDisplayPanel.Name = "mainDisplayPanel";
+            this.mainDisplayPanel.Size = new System.Drawing.Size(600, 300);
+            this.mainDisplayPanel.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -256,6 +267,7 @@ namespace ThesisApp1
         private System.Windows.Forms.Button runAnalysisButton;
         private System.Windows.Forms.Button mergeButton;
         private System.Windows.Forms.Label execTimeLabel;
+        private System.Windows.Forms.Panel mainDisplayPanel;
     }
 }
 

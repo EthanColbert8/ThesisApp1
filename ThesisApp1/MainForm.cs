@@ -33,6 +33,28 @@ namespace ThesisApp1
             MessageBox.Show(e.Message);
         }
 
+        private void displayAnalysis()
+        {
+            mainDisplayPanel.Visible = false;
+
+            while (mainDisplayPanel.Controls.Count > 0)
+            {
+                mainDisplayPanel.Controls[0].Dispose();
+            }
+
+            outputLabel.Text = "This analysis contains " + currentAnalysis.EventList.Count + " events:";
+
+            int locationHeight = 10;
+            foreach (AnalysisEvent eventToDisplay in currentAnalysis.EventList)
+            {
+                EventDisplayPanel nextDisplay = new EventDisplayPanel(eventToDisplay, new Point(6, locationHeight));
+                mainDisplayPanel.Controls.Add(nextDisplay);
+                locationHeight += nextDisplay.Size.Height + 10;
+            }
+
+            mainDisplayPanel.Visible = true;
+        }
+
         private void newAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -53,8 +75,10 @@ namespace ThesisApp1
 
                     timer.Stop();
 
-                    outputLabel.Text = currentAnalysis.ToString();
                     execTimeLabel.Text = "Analysis execution time: " + (((double)timer.ElapsedMilliseconds) / 1000.0) + " seconds";
+
+                    //outputLabel.Text = currentAnalysis.ToString();
+                    displayAnalysis();
                 }
 
             }
@@ -83,7 +107,8 @@ namespace ThesisApp1
 
                     fileToRead.Close();
 
-                    outputLabel.Text = currentAnalysis.ToString();
+                    //outputLabel.Text = currentAnalysis.ToString();
+                    displayAnalysis();
                 }
             }
             catch (Exception ex)
