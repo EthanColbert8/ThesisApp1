@@ -121,7 +121,6 @@ namespace ThesisApp1
                 reader = XmlReader.Create(dataStream, settings);
             }
 
-
             reader.MoveToContent();
 
             RunNumber = int.Parse(reader.GetAttribute("runNumber"));
@@ -316,7 +315,7 @@ namespace ThesisApp1
 
     //This is an implementation of the IComparer interface, allowing instances of the
     //AnalysisEvent class to be ordered.
-    public class EventComparison : IComparer<AnalysisEvent>
+    public class EventComparer : IComparer<AnalysisEvent>
     {
         public int Compare(AnalysisEvent x, AnalysisEvent y)
         {

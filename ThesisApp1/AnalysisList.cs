@@ -14,23 +14,19 @@ namespace ThesisApp1
 
         public string FileSavedIn { get; set; }
         public string TopDirectory { get; set; }
-
-        //The XmlSerializer won't work with a SortedSet. You'll need to change it back to a list and
-        //implement the sorting yourself.
-        //Sorting is necessary to avoid duplicate events in the data.
-        //[XmlIgnore]
+        
         public List<AnalysisEvent> EventList { get; }
 
         //parameterless constructor
         public AnalysisList()
         {
-            FileSavedIn = "";
+            FileSavedIn = String.Empty;
             EventList = new List<AnalysisEvent>();
         }
 
         public AnalysisList(string topFolder)
         {
-            FileSavedIn = "";
+            FileSavedIn = String.Empty;
             TopDirectory = topFolder;
             EventList = new List<AnalysisEvent>();
         }
@@ -138,9 +134,17 @@ namespace ThesisApp1
             }
         }
 
-        public void AddEvent(AnalysisEvent newEvent)
+        public bool AddEvent(AnalysisEvent newEvent)
         {
-            EventList.Add(newEvent);
+            int insertIndex = EventList.BinarySearch(newEvent, new EventComparer());
+
+            if (insertIndex < 0)
+            {
+                EventList.Insert(~insertIndex, newEvent);
+                return true;
+            }
+
+            return false;
         }
 
         public override string ToString()

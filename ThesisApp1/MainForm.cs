@@ -121,7 +121,7 @@ namespace ThesisApp1
         {
             try
             {
-                if (!(currentAnalysis.FileSavedIn.Equals("")))
+                if (!(currentAnalysis.FileSavedIn.Equals(String.Empty)))
                 {
                     XmlSerializer writer = new XmlSerializer(typeof(AnalysisList));
                     FileStream fileToSave = File.Create(currentAnalysis.FileSavedIn);
