@@ -123,10 +123,9 @@ namespace ThesisApp1
 
 
             reader.MoveToContent();
-            reader.MoveToAttribute("runNumber");
-            RunNumber = int.Parse(reader.Value);
-            reader.MoveToAttribute("eventNumber");
-            EventNumber = int.Parse(reader.Value);
+
+            RunNumber = int.Parse(reader.GetAttribute("runNumber"));
+            EventNumber = int.Parse(reader.GetAttribute("eventNumber"));
 
             while (reader.Read())
             {
