@@ -50,6 +50,12 @@
   <ItemGroup>
     <Compile Include="AnalysisEvent.cs" />
     <Compile Include="AnalysisList.cs" />
+    <Compile Include="cutSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cutSelectionForm.Designer.cs">
+      <DependentUpon>cutSelectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventDisplayPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="cutSelectionForm.resx">
+      <DependentUpon>cutSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
