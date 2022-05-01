@@ -10,21 +10,31 @@ namespace ThesisApp1
     class EventDisplayPanel : Panel
     {
         private System.Drawing.Color backgroundColor = System.Drawing.SystemColors.Control;
+        
+        private TextBox EventRunNumberDisplay;
+        private TextBox LastKnownPathDisplay;
+        private TextBox ElectronPtDisplay;
+        private TextBox ElectronEtaDisplay;
+        private TextBox MuonPtDisplay;
+        private TextBox MuonEtaDisplay;
+        private TextBox EtMissingDisplay;
 
-        public AnalysisEvent EventDisplayed { get; set; }
-        public TextBox EventRunNumberDisplay { get; set; }
-        public TextBox LastKnownPathDisplay { get; set; }
-        public TextBox ElectronPtDisplay { get; set; }
-        public TextBox ElectronEtaDisplay { get; set; }
-        public TextBox MuonPtDisplay { get; set; }
-        public TextBox MuonEtaDisplay { get; set; }
-        public TextBox EtMissingDisplay { get; set; }
+        private AnalysisEvent _eventDisplayed;
+        public AnalysisEvent EventDisplayed
+        {
+            get { return _eventDisplayed; }
+            set
+            {
+                _eventDisplayed = value;
+                fillDisplay();
+            }
+        }
 
         public EventDisplayPanel()
         {
-            this.BackColor = backgroundColor;
-            this.AutoScroll = true;
-            this.BorderStyle = BorderStyle.FixedSingle;
+            BackColor = backgroundColor;
+            AutoScroll = true;
+            BorderStyle = BorderStyle.FixedSingle;
 
             EventRunNumberDisplay = new TextBox();
             setupTextDisplay(EventRunNumberDisplay);
@@ -57,55 +67,32 @@ namespace ThesisApp1
 
         public EventDisplayPanel(AnalysisEvent newEvent)
         {
-            this.BackColor = backgroundColor;
-            this.AutoScroll = true;
-            this.BorderStyle = BorderStyle.FixedSingle;
-
-            EventDisplayed = newEvent;
+            BackColor = backgroundColor;
+            AutoScroll = true;
+            BorderStyle = BorderStyle.FixedSingle;
 
             EventRunNumberDisplay = new TextBox();
             setupTextDisplay(EventRunNumberDisplay);
-            EventRunNumberDisplay.Text = "Run number: " + EventDisplayed.RunNumber + "Event number: " + EventDisplayed.EventNumber;
 
             LastKnownPathDisplay = new TextBox();
             setupTextDisplay(LastKnownPathDisplay);
-            LastKnownPathDisplay.Text = "Last known file path: " + EventDisplayed.LastKnownFilePath;
 
             ElectronPtDisplay = new TextBox();
             setupTextDisplay(ElectronPtDisplay);
-            ElectronPtDisplay.Text = String.Empty;
 
             ElectronEtaDisplay = new TextBox();
             setupTextDisplay(ElectronEtaDisplay);
-            ElectronEtaDisplay.Text = String.Empty;
-
-            if (EventDisplayed.HasElectrons)
-            {
-                ElectronPtDisplay.Text = "Electron transverse momenta: [";
-                ElectronEtaDisplay.Text = "Electron pseudorapidities: [";
-                ElectronPtDisplay.Text = fillList(ElectronPtDisplay.Text, EventDisplayed.ElectronPTs);
-                ElectronEtaDisplay.Text = fillList(ElectronEtaDisplay.Text, EventDisplayed.ElectronEtas);
-            }
 
             MuonPtDisplay = new TextBox();
             setupTextDisplay(MuonPtDisplay);
-            MuonPtDisplay.Text = String.Empty;
 
             MuonEtaDisplay = new TextBox();
             setupTextDisplay(MuonEtaDisplay);
-            MuonEtaDisplay.Text = String.Empty;
-
-            if (EventDisplayed.HasMuons)
-            {
-                MuonPtDisplay.Text = "Muon transverse momenta: [";
-                MuonEtaDisplay.Text = "Muon pseudorapidities: ";
-                MuonPtDisplay.Text = fillList(MuonPtDisplay.Text, EventDisplayed.MuonPTs);
-                MuonEtaDisplay.Text = fillList(MuonEtaDisplay.Text, EventDisplayed.MuonEtas);
-            }
             
             EtMissingDisplay = new TextBox();
             setupTextDisplay(EtMissingDisplay);
-            EtMissingDisplay.Text = "Missing energy: " + EventDisplayed.EtMissing;
+
+            EventDisplayed = newEvent;
         }
 
         //here
@@ -128,6 +115,35 @@ namespace ThesisApp1
             displayToSetup.ReadOnly = true;
             displayToSetup.BorderStyle = BorderStyle.None;
             displayToSetup.BackColor = this.BackColor;
+        }
+
+        private void fillDisplay()
+        {
+            EventRunNumberDisplay.Text = "Run number: " + EventDisplayed.RunNumber + "Event number: " + EventDisplayed.EventNumber;
+
+            LastKnownPathDisplay.Text = "Last known file path: " + EventDisplayed.LastKnownFilePath;
+
+            ElectronPtDisplay.Text = String.Empty;
+            ElectronEtaDisplay.Text = String.Empty;
+            if (EventDisplayed.HasElectrons)
+            {
+                ElectronPtDisplay.Text = "Electron transverse momenta: [";
+                ElectronEtaDisplay.Text = "Electron pseudorapidities: [";
+                ElectronPtDisplay.Text = fillList(ElectronPtDisplay.Text, EventDisplayed.ElectronPTs);
+                ElectronEtaDisplay.Text = fillList(ElectronEtaDisplay.Text, EventDisplayed.ElectronEtas);
+            }
+
+            MuonPtDisplay.Text = String.Empty;
+            MuonEtaDisplay.Text = String.Empty;
+            if (EventDisplayed.HasMuons)
+            {
+                MuonPtDisplay.Text = "Muon transverse momenta: [";
+                MuonEtaDisplay.Text = "Muon pseudorapidities: ";
+                MuonPtDisplay.Text = fillList(MuonPtDisplay.Text, EventDisplayed.MuonPTs);
+                MuonEtaDisplay.Text = fillList(MuonEtaDisplay.Text, EventDisplayed.MuonEtas);
+            }
+
+            EtMissingDisplay.Text = "Missing energy: " + EventDisplayed.EtMissing;
         }
     }
 }
